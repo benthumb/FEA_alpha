@@ -1,12 +1,22 @@
 class Person
   # Setters getters / creational / constructive
 
-  attr_reader :name, :birthdate, :birthplace, :gender
-  def initialize(name, birthdate, birthplace, gender)
-    @name = name
-    @birthdate = birthdate
-    @birthplace = birthplace
-    @gender = gender
+  attr_accessor :name, :birthdate, :birthplace, :gender
+
+  def initialize(*args)
+    if args.length == 4
+      @name = args[0]
+      @birthdate = args[1]
+      @birthplace = args[2]
+      @gender = args[3]
+    elsif args.length == 0 
+      @name = '' 
+      @birthdate = ''
+      @birthplace = ''
+      @gender = ''
+    else
+      raise ArgumentError, 'Number of arguments required are 4 or 0'
+    end
   end
 end
 

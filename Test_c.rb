@@ -9,6 +9,41 @@ class Tests
   include Utilities
 
   attr_accessor :failed_tests, :passed_tests
+
+  def setup_test_data
+    # **************** People ****************
+    @charlie_brown = Person.new("Charlie Brown","09121966","New York","male")
+    @charlie_brown_prm = Person.new("Charlie Brown","09121966","New York","male")
+    @psycho_killer = Person.new("Psycho Killer","04011970","New Jersey","female")
+    @riki_pretty = Person.new("Riki Pretty","08271992","Tokyo","female")
+    @slim_pickings = Person.new("Slim Pickings","05281942","Tokyo","male")
+    @modest_mouse = Person.new("Modest Mouse","02141946","Saitama","female")
+
+#    person_bill = Person.new("Morris Bill","01212004","New York","male")
+#    kua_profile_bill = Kua.new(person_bill)
+
+#    love_sally = LoveInterest.new("Sally Mae","01222004","Los Angeles","female")
+#    kua_profile_sally = Kua.new(love_sally)
+
+#    love_unhappy = LoveInterest.new("Unhappy Camper","03122004","Miami","female")
+#    kua_profile_unhappy = Kua.new(love_unhappy)
+
+#    love_bertha = LoveInterest.new("Big Bertha","02082005","Cancun","female")
+#    kua_profile_bertha = Kua.new(love_bertha)
+
+    # **************** Love Interests ****************
+    @melissa_dooley_lv = LoveInterest.new("Melissa Dooley","03121972","Los Angeles","female")
+    @indifferent_dodger_lv = LoveInterest.new("Indifferent Dodger","07011970","Miami","female")
+    @brain_wartscht_lv= LoveInterest.new("Brain Wartscht","12241997","Cancun","female")
+    @shirley_temple_lv = LoveInterest.new("Shirley Temple","01141901","Hollywood","female")
+    @maniac_lv = LoveInterest.new("Maniac","01271974","Pittsboig","male")
+
+    # **************** Birth Dates****************
+    @july_test_birthdate1 = '07041974'
+    @nov_test_birthdate2 = '11232001'
+    @jan_test_birthdate3 = '01141902'
+  end 
+
   def initialize
     @failed_tests = 0
     @passed_tests = 0
@@ -36,21 +71,27 @@ class Tests
 
   def create_person_instance
     # Use initialization to construct person instance:
-    a = Person.new("Charlie Brown","09121966","New York","male")
     puts "//+++++++++++++ TEST: Create Person Instance +++++++++++++//"
     puts "Newly initialized person:"
-    puts "Name: " << a.name
-    puts "Birthdate: " << a.birthdate
-    puts "Birthplace: " << a.birthplace
-    puts "Gender: " << a.gender
+    puts "Name: " << @charlie_brown.name
+    puts "Birthdate: " << @charlie_brown.birthdate
+    puts "Birthplace: " << @charlie_brown.birthplace
+    puts "Gender: " << @charlie_brown.gender
 
     # Use setters to create person instance w/ same info
-    b = Person.new("Charlie Brown","09121966","New York","male")
-    c = Person.new("Psycho Killer","04011970","New Jersey","female")
 
-    @instance_a = [a.name,a.birthdate,a.birthplace,a.gender]
-    @instance_b = [b.name,b.birthdate,b.birthplace,b.gender]
-    @instance_c = [c.name,c.birthdate,c.birthplace,c.gender]
+    @instance_a = [@charlie_brown.name,
+		   @charlie_brown.birthdate,
+		   @charlie_brown.birthplace,
+		   @charlie_brown.gender]
+    @instance_b = [@charlie_brown_prm.name,
+		   @charlie_brown_prm.birthdate,
+		   @charlie_brown_prm.birthplace,
+		   @charlie_brown_prm.gender]
+    @instance_c = [@psycho_killer.name,
+		   @psycho_killer.birthdate,
+		   @psycho_killer.birthplace,
+		   @psycho_killer.gender]
 
     self.assert_equal(@instance_a,@instance_b)
     self.assert_not_equal(@instance_a,@instance_c)
@@ -58,47 +99,60 @@ class Tests
 
   def create_love_interest_instance
     # Use initialization to construct love interest instance:
-    a = LoveInterest.new("Melissa Dooley","03121972","Los Angeles","female")
     puts "//+++++++++++++ TEST: Create Love Interest Instance +++++++++++++//"
     puts "Newly initialized love interest:"
-    puts "Name: " << a.name
-    puts "Birthdate: " << a.birthdate
-    puts "Birthplace: " << a.birthplace
-    puts "Gender: " << a.gender
+    puts "Name: " << @melissa_dooley_lv.name
+    puts "Birthdate: " << @melissa_dooley_lv.birthdate
+    puts "Birthplace: " << @melissa_dooley_lv.birthplace
+    puts "Gender: " << @melissa_dooley_lv.gender
 
     # Use setters to create person instance w/ same info
-    b = LoveInterest.new("Melissa Dooley","03121972","Los Angeles","female")
-    c = LoveInterest.new("Joan Baez","01011970","Boston","transgender")
+    melissa_dooley_lv_prm = LoveInterest.new()
+    melissa_dooley_lv_prm.name = "Melissa Dooley"
+    melissa_dooley_lv_prm.birthdate = "03121972"
+    melissa_dooley_lv_prm.birthplace = "Los Angeles"
+    melissa_dooley_lv_prm.gender = "female"
 
-    @instance_a = [a.name,a.birthdate,a.birthplace,a.gender]
-    @instance_b = [b.name,b.birthdate,b.birthplace,b.gender]
-    @instance_c = [c.name,c.birthdate,c.birthplace,c.gender]
+    joan_baez_lv = LoveInterest.new()
+    joan_baez_lv.name = "Joan Baez"
+    joan_baez_lv.birthdate = "01011970"
+    joan_baez_lv.birthplace = "Boston"
+    joan_baez_lv.gender = "transgender"
+
+    @instance_a = [@melissa_dooley_lv.name,
+		   @melissa_dooley_lv.birthdate,
+		   @melissa_dooley_lv.birthplace,
+		   @melissa_dooley_lv.gender]
+
+    @instance_b = [melissa_dooley_lv_prm.name,
+		   melissa_dooley_lv_prm.birthdate,
+		   melissa_dooley_lv_prm.birthplace,
+		   melissa_dooley_lv_prm.gender]
+
+    @instance_c = [joan_baez_lv.name,
+		   joan_baez_lv.birthdate,
+		   joan_baez_lv.birthplace,
+		   joan_baez_lv.gender]
 
     self.assert_equal(@instance_a,@instance_b)
     self.assert_not_equal(@instance_a,@instance_c)
 
-    a.compatibility_score = 90
-    c.compatibility_score = 40
+    @melissa_dooley_lv.compatibility_score = 90
+    joan_baez_lv.compatibility_score = 40
 
     puts "//+++++++++++++ TEST: Compatibility Cut-off +++++++++++++//"
-    self.assert_equal(a.is_compatible,true)
-    self.assert_not_equal(c.is_compatible,true)
+    self.assert_equal(@melissa_dooley_lv.is_compatible,true)
+    self.assert_not_equal(joan_baez_lv.is_compatible,true)
   end
 
   def kua_profile
-    a = Person.new("Charlie Brown","09121966","New York","male")
-    b = LoveInterest.new("Melissa Dooley","03121972","Los Angeles","female")
-    c = LoveInterest.new("Indifferent Dodger","07011970","Miami","female")
-    d = LoveInterest.new("Brain Wartscht","12241997","Cancun","female")
-    e = Person.new("Riki Pretty","08271992","Tokyo","female")
-    f = Person.new("Slim Pickings","05281942","Tokyo","male")
 
-    kua_profile_a = Kua.new(a)
-    kua_profile_b = Kua.new(b)
-    kua_profile_c = Kua.new(c)
-    kua_profile_d = Kua.new(d)
-    kua_profile_e = Kua.new(e)
-    kua_profile_f = Kua.new(f)
+    kua_profile_a = Kua.new(@charlie_brown)
+    kua_profile_b = Kua.new(@melissa_dooley_lv)
+    kua_profile_c = Kua.new(@indifferent_dodger_lv)
+    kua_profile_d = Kua.new(@brain_wartscht_lv)
+    kua_profile_e = Kua.new(@riki_pretty)
+    kua_profile_f = Kua.new(@slim_pickings)
 
     puts "//+++++++++++++ TEST: Kua Profile +++++++++++++//"
     puts "Profile A: " << kua_profile_a.group << " " << kua_profile_a.kua_number
@@ -120,15 +174,10 @@ class Tests
   end
 
   def birthdate_in_range
-    a = Person.new("Slim Pickings","05281942","Tokyo","male")
-    b = Person.new("Modest Mouse","02141946","Saitama","female")
-    c = LoveInterest.new("Shirley Temple","01141901","Hollywood","female")
-    d = LoveInterest.new("Maniac","01271974","Pittsboig","male")
-
-    kua_profile_a = Kua.new(a)
-    kua_profile_b = Kua.new(b)
-    kua_profile_c = Kua.new(c)
-    kua_profile_d = Kua.new(d)
+    kua_profile_a = Kua.new(@slim_pickings)
+    kua_profile_b = Kua.new(@modest_mouse)
+    kua_profile_c = Kua.new(@shirley_temple_lv)
+    kua_profile_d = Kua.new(@maniac_lv)
 
     puts "//+++++++++++++ TEST: Birthdate is In Range +++++++++++++//"
     self.assert_equal(kua_profile_a.is_in_range,false)
@@ -138,17 +187,14 @@ class Tests
   end
 
   def year_lookup_hash
-    test_birthdate1 = '07041974'
-    test_birthdate2 = '11232001'
-    test_birthdate3 = '01141902'
 
     ans_1974 = "Jan 23 11:02"
     ans_2001 = "Jan 24 13:07"
     ans_1902 = "Jan 9 21:14"
 
-    yr_hash1 = get_year_lookup_hash(test_birthdate1)
-    yr_hash2 = get_year_lookup_hash(test_birthdate2)
-    yr_hash3 = get_year_lookup_hash(test_birthdate3)
+    yr_hash1 = get_year_lookup_hash(@july_test_birthdate1)
+    yr_hash2 = get_year_lookup_hash(@nov_test_birthdate2)
+    yr_hash3 = get_year_lookup_hash(@jan_test_birthdate3)
 
     puts "//+++++++++++++ TEST: Get Year Lookup Hash +++++++++++++//"
 
@@ -177,17 +223,10 @@ class Tests
     # Monkey - 2004-01-22 -> 2005-02-09
 
     # // ****** GROUP 1: Rooster ******     # Rooster - 1957-01-31 -> 1958-02-18
-    person_charlie = Person.new("Charlie Brown","01241957","New York","male")
-    kua_profile_charlie = Kua.new(person_charlie)
-
-    love_melissa = LoveInterest.new("Melissa Dooley","01311957","Los Angeles","female")
-    kua_profile_melissa = Kua.new(love_melissa)
-
-    love_indiff = LoveInterest.new("Indifferent Dodger","02091957","Miami","female")
-    kua_profile_indiff = Kua.new(love_indiff)
-
-    love_wart = LoveInterest.new("Brain Wartscht","02181958","Cancun","female")
-    kua_profile_wart = Kua.new(love_wart)
+    kua_profile_charlie = Kua.new(@charlie_brown)
+    kua_profile_melissa = Kua.new(@melissa_dooley_lv)
+    kua_profile_indiff = Kua.new(@indifferent_dodger_lv)
+    kua_profile_wart = Kua.new(@brain_wartscht_lv)
 
     # // ****** GROUP 2: Monkey ******     # Monkey - 2004-01-22 -> 2005-02-09
     person_bill = Person.new("Morris Bill","01212004","New York","male")
@@ -203,10 +242,10 @@ class Tests
     kua_profile_bertha = Kua.new(love_bertha)
 
     puts "//+++++++++++++ TEST: Det Calendar Yr Beta +++++++++++++//"
-    year_1 = kua_profile_charlie.calendar_yr_calc_beta(get_year_lookup_hash(person_charlie.birthdate))
-    year_2 = kua_profile_melissa.calendar_yr_calc_beta(get_year_lookup_hash(love_melissa.birthdate))
-    year_3 = kua_profile_indiff.calendar_yr_calc_beta(get_year_lookup_hash(love_indiff.birthdate))
-    year_4 = kua_profile_wart.calendar_yr_calc_beta(get_year_lookup_hash(love_wart.birthdate))
+    year_1 = kua_profile_charlie.calendar_yr_calc_beta(get_year_lookup_hash(@charlie_brown.birthdate))
+    year_2 = kua_profile_melissa.calendar_yr_calc_beta(get_year_lookup_hash(@melissa_dooley_lv.birthdate))
+    year_3 = kua_profile_indiff.calendar_yr_calc_beta(get_year_lookup_hash(@indifferent_dodger_lv.birthdate))
+    year_4 = kua_profile_wart.calendar_yr_calc_beta(get_year_lookup_hash(@brain_wartscht_lv.birthdate))
 
     logger.debug "year 1957: " << year_1
     logger.debug "year 1957: " << year_2
@@ -283,6 +322,7 @@ class Tests
   end
 
   def run
+    self.setup_test_data
     self.create_person_instance
     self.create_love_interest_instance
     self.kua_profile
