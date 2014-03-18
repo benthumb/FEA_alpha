@@ -18,18 +18,13 @@ class Tests
     @riki_pretty = Person.new("Riki Pretty","08271992","Tokyo","female")
     @slim_pickings = Person.new("Slim Pickings","05281942","Tokyo","male")
     @modest_mouse = Person.new("Modest Mouse","02141946","Saitama","female")
-
-#    person_bill = Person.new("Morris Bill","01212004","New York","male")
-#    kua_profile_bill = Kua.new(person_bill)
-
-#    love_sally = LoveInterest.new("Sally Mae","01222004","Los Angeles","female")
-#    kua_profile_sally = Kua.new(love_sally)
-
-#    love_unhappy = LoveInterest.new("Unhappy Camper","03122004","Miami","female")
-#    kua_profile_unhappy = Kua.new(love_unhappy)
-
-#    love_bertha = LoveInterest.new("Big Bertha","02082005","Cancun","female")
-#    kua_profile_bertha = Kua.new(love_bertha)
+    @morris_bill = Person.new("Morris Bill","01212004","New York","male")
+    @charlie_nutz = Person.new("Charlie Nutz","01121967","Seattle","female")
+    @jim_peace = Person.new("Jim Peace","02161984","Washington, DC","male")
+    @tomoko_saito = Person.new("Tomoko Saito","12101973","Hiroshima","female")
+    @mitsuko_matsuei = Person.new("Mitsuko","02111946","Matsuei","female")
+    @jane_krakowski = Person.new("Jane Krakowski","10111968","Chicago","female")
+    @sarah_silverman = Person.new("Sarah Silverman","12011970","Manchester","female")
 
     # **************** Love Interests ****************
     @melissa_dooley_lv = LoveInterest.new("Melissa Dooley","03121972","Los Angeles","female")
@@ -37,11 +32,34 @@ class Tests
     @brain_wartscht_lv= LoveInterest.new("Brain Wartscht","12241997","Cancun","female")
     @shirley_temple_lv = LoveInterest.new("Shirley Temple","01141901","Hollywood","female")
     @maniac_lv = LoveInterest.new("Maniac","01271974","Pittsboig","male")
-
-    # **************** Birth Dates****************
+    @sally_mae_lv = LoveInterest.new("Sally Mae","01222004","Los Angeles","female")
+    @unhappy_camper_lv = LoveInterest.new("Unhappy Camper","03122004","Miami","female")
+    @big_bertha_lv = LoveInterest.new("Big Bertha","02082005","Cancun","female")
+    
+    # **************** Birth Dates ****************
     @july_test_birthdate1 = '07041974'
     @nov_test_birthdate2 = '11232001'
     @jan_test_birthdate3 = '01141902'
+
+    # **************** Kua Profile ****************
+    @kua_profile_nutz = Kua.new(@charlie_nutz)
+    @kua_profile_peace = Kua.new(@jim_peace)
+    @kua_profile_tomoko = Kua.new(@tomoko_saito)
+    @kua_profile_mitsuko = Kua.new(@mitsuko_matsuei)
+    @kua_profile_kraw = Kua.new(@jane_krakowski)
+    @kua_profile_sarah = Kua.new(@sarah_silverman)
+
+    # // ****** GROUP 1: Rooster ******     # Rooster - 1957-01-31 -> 1958-02-18
+    @kua_profile_charlie = Kua.new(@charlie_brown)
+    @kua_profile_melissa = Kua.new(@melissa_dooley_lv)
+    @kua_profile_indiff = Kua.new(@indifferent_dodger_lv)
+    @kua_profile_wart = Kua.new(@brain_wartscht_lv)
+
+    # // ****** GROUP 2: Monkey ******     # Monkey - 2004-01-22 -> 2005-02-09
+    @kua_profile_bill = Kua.new(@morris_bill)
+    @kua_profile_sally = Kua.new(@sally_mae_lv)
+    @kua_profile_unhappy = Kua.new(@unhappy_camper_lv)
+    @kua_profile_bertha = Kua.new(@big_bertha_lv)
   end 
 
   def initialize
@@ -222,30 +240,11 @@ class Tests
     # Rooster - 1957-01-31 -> 1958-02-18
     # Monkey - 2004-01-22 -> 2005-02-09
 
-    # // ****** GROUP 1: Rooster ******     # Rooster - 1957-01-31 -> 1958-02-18
-    kua_profile_charlie = Kua.new(@charlie_brown)
-    kua_profile_melissa = Kua.new(@melissa_dooley_lv)
-    kua_profile_indiff = Kua.new(@indifferent_dodger_lv)
-    kua_profile_wart = Kua.new(@brain_wartscht_lv)
-
-    # // ****** GROUP 2: Monkey ******     # Monkey - 2004-01-22 -> 2005-02-09
-    person_bill = Person.new("Morris Bill","01212004","New York","male")
-    kua_profile_bill = Kua.new(person_bill)
-
-    love_sally = LoveInterest.new("Sally Mae","01222004","Los Angeles","female")
-    kua_profile_sally = Kua.new(love_sally)
-
-    love_unhappy = LoveInterest.new("Unhappy Camper","03122004","Miami","female")
-    kua_profile_unhappy = Kua.new(love_unhappy)
-
-    love_bertha = LoveInterest.new("Big Bertha","02082005","Cancun","female")
-    kua_profile_bertha = Kua.new(love_bertha)
-
     puts "//+++++++++++++ TEST: Det Calendar Yr Beta +++++++++++++//"
-    year_1 = kua_profile_charlie.calendar_yr_calc_beta(get_year_lookup_hash(@charlie_brown.birthdate))
-    year_2 = kua_profile_melissa.calendar_yr_calc_beta(get_year_lookup_hash(@melissa_dooley_lv.birthdate))
-    year_3 = kua_profile_indiff.calendar_yr_calc_beta(get_year_lookup_hash(@indifferent_dodger_lv.birthdate))
-    year_4 = kua_profile_wart.calendar_yr_calc_beta(get_year_lookup_hash(@brain_wartscht_lv.birthdate))
+    year_1 = @kua_profile_charlie.calendar_yr_calc_beta(get_year_lookup_hash(@charlie_brown.birthdate))
+    year_2 = @kua_profile_melissa.calendar_yr_calc_beta(get_year_lookup_hash(@melissa_dooley_lv.birthdate))
+    year_3 = @kua_profile_indiff.calendar_yr_calc_beta(get_year_lookup_hash(@indifferent_dodger_lv.birthdate))
+    year_4 = @kua_profile_wart.calendar_yr_calc_beta(get_year_lookup_hash(@brain_wartscht_lv.birthdate))
 
     logger.debug "year 1957: " << year_1
     logger.debug "year 1957: " << year_2
@@ -257,10 +256,10 @@ class Tests
     assert_equal(year_3,"1957")
     assert_equal(year_4,"1958")
 
-    year_5 = kua_profile_bill.calendar_yr_calc_beta(get_year_lookup_hash(person_bill.birthdate))
-    year_6 = kua_profile_sally.calendar_yr_calc_beta(get_year_lookup_hash(love_sally.birthdate))
-    year_7 = kua_profile_unhappy.calendar_yr_calc_beta(get_year_lookup_hash(love_unhappy.birthdate))
-    year_8 = kua_profile_bertha.calendar_yr_calc_beta(get_year_lookup_hash(love_bertha.birthdate))
+    year_5 = @kua_profile_bill.calendar_yr_calc_beta(get_year_lookup_hash(@morris_bill.birthdate))
+    year_6 = @kua_profile_sally.calendar_yr_calc_beta(get_year_lookup_hash(@sally_mae_lv.birthdate))
+    year_7 = @kua_profile_unhappy.calendar_yr_calc_beta(get_year_lookup_hash(@unhappy_camper_lv.birthdate))
+    year_8 = @kua_profile_bertha.calendar_yr_calc_beta(get_year_lookup_hash(@big_bertha_lv.birthdate))
 
     logger.debug "year 2004: " << year_5
     logger.debug "year 2004: " << year_6
@@ -275,50 +274,47 @@ class Tests
 
   def kua_profile_details
     puts "//+++++++++++++ TEST: Kua Profile - details +++++++++++++//"
-    person_nutz = Person.new("Charlie Nutz","01121967","Seattle","female")
-    kua_profile_nutz = Kua.new(person_nutz)
-    puts "Profile details: " << kua_profile_nutz.details.to_s
-    puts "Nutz's kua number is: " << kua_profile_nutz.kua_number
-    puts "Nutz's group is: " << kua_profile_nutz.group
+    puts "Profile details: " << @kua_profile_nutz.details.to_s
+    puts "Nutz's kua number is: " << @kua_profile_nutz.kua_number
+    puts "Nutz's group is: " << @kua_profile_nutz.group
 
-    assert_equal(kua_profile_nutz.kua_number, "8")
-    assert_equal(kua_profile_nutz.group, "West")
+    assert_equal(@kua_profile_nutz.kua_number, "8")
+    assert_equal(@kua_profile_nutz.group, "West")
 
-    person_peace = Person.new("Jim Peace","02161984","Washington, DC","male")
-    kua_profile_peace = Kua.new(person_peace)
-    puts "Profile details: " << kua_profile_peace.details.to_s
-    puts "Peace's kua number is: " << kua_profile_peace.kua_number
-    puts "Peace's group is: " << kua_profile_peace.group
+    puts "Profile details: " << @kua_profile_peace.details.to_s
+    puts "Peace's kua number is: " << @kua_profile_peace.kua_number
+    puts "Peace's group is: " << @kua_profile_peace.group
 
-    assert_equal(kua_profile_peace.kua_number, "7")
-    assert_equal(kua_profile_peace.group, "West")
+    assert_equal(@kua_profile_peace.kua_number, "7")
+    assert_equal(@kua_profile_peace.group, "West")
 
-    person_tomoko = Person.new("Tomoko Saito","12101973","Hiroshima","female")
-    kua_profile_tomoko = Kua.new(person_tomoko)
-    puts "Profile details: " << kua_profile_tomoko.details.to_s
-    puts "Tomoko's kua number is: " << kua_profile_tomoko.kua_number
-    puts "Tomoko's group is: " << kua_profile_tomoko.group
+    puts "Profile details: " << @kua_profile_tomoko.details.to_s
+    puts "Tomoko's kua number is: " << @kua_profile_tomoko.kua_number
+    puts "Tomoko's group is: " << @kua_profile_tomoko.group
 
-    assert_equal(kua_profile_tomoko.kua_number, "6")
-    assert_equal(kua_profile_tomoko.group, "West")
+    assert_equal(@kua_profile_tomoko.kua_number, "6")
+    assert_equal(@kua_profile_tomoko.group, "West")
 
-    person_mitsuko = Person.new("Mitsuko","02111946","Matsuei","female")
-    kua_profile_mitsuko = Kua.new(person_mitsuko)
-    puts "Profile details: " << kua_profile_mitsuko.details.to_s
-    puts "Mitsuko's kua number is: " << kua_profile_mitsuko.kua_number
-    puts "Mitsuko's group is: " << kua_profile_mitsuko.group
+    puts "Profile details: " << @kua_profile_mitsuko.details.to_s
+    puts "Mitsuko's kua number is: " << @kua_profile_mitsuko.kua_number
+    puts "Mitsuko's group is: " << @kua_profile_mitsuko.group
 
-    assert_equal(kua_profile_mitsuko.kua_number, "6")
-    assert_equal(kua_profile_mitsuko.group, "West")
+    assert_equal(@kua_profile_mitsuko.kua_number, "6")
+    assert_equal(@kua_profile_mitsuko.group, "West")
 
-    person_kraw = Person.new("Jane Krakowski","10111968","Chicago","female")
-    kua_profile_kraw = Kua.new(person_kraw)
-    puts "Profile details: " << kua_profile_kraw.details.to_s
-    puts "Jane's kua number is: " << kua_profile_kraw.kua_number
-    puts "Jane's group is: " << kua_profile_kraw.group
+    puts "Profile details: " << @kua_profile_kraw.details.to_s
+    puts "Jane's kua number is: " << @kua_profile_kraw.kua_number
+    puts "Jane's group is: " << @kua_profile_kraw.group
 
-    assert_equal(kua_profile_kraw.kua_number, "1")
-    assert_equal(kua_profile_kraw.group, "East")
+    assert_equal(@kua_profile_kraw.kua_number, "1")
+    assert_equal(@kua_profile_kraw.group, "East")
+
+    puts "Profile details: " << @kua_profile_sarah.details.to_s
+    puts "Sarah's kua number is: " << @kua_profile_sarah.kua_number
+    puts "Sarah's group is: " << @kua_profile_sarah.group
+
+    assert_equal(@kua_profile_sarah.kua_number, "1")
+    assert_equal(@kua_profile_sarah.group, "East")
   end
 
   def run
