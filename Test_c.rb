@@ -1,4 +1,4 @@
-require './Profile.rb'
+require './KuaProfile.rb'
 require './Person.rb'
 require './utilities.rb'
 require './Logging.rb'
@@ -42,24 +42,24 @@ class Tests
     @jan_test_birthdate3 = '01141902'
 
     # **************** Kua Profile ****************
-    @kua_profile_nutz = Kua.new(@charlie_nutz)
-    @kua_profile_peace = Kua.new(@jim_peace)
-    @kua_profile_tomoko = Kua.new(@tomoko_saito)
-    @kua_profile_mitsuko = Kua.new(@mitsuko_matsuei)
-    @kua_profile_kraw = Kua.new(@jane_krakowski)
-    @kua_profile_sarah = Kua.new(@sarah_silverman)
+    @kua_profile_nutz = KuaProfile.new(@charlie_nutz)
+    @kua_profile_peace = KuaProfile.new(@jim_peace)
+    @kua_profile_tomoko = KuaProfile.new(@tomoko_saito)
+    @kua_profile_mitsuko = KuaProfile.new(@mitsuko_matsuei)
+    @kua_profile_kraw = KuaProfile.new(@jane_krakowski)
+    @kua_profile_sarah = KuaProfile.new(@sarah_silverman)
 
     # // ****** GROUP 1: Rooster ******     # Rooster - 1957-01-31 -> 1958-02-18
-    @kua_profile_charlie = Kua.new(@charlie_brown)
-    @kua_profile_melissa = Kua.new(@melissa_dooley_lv)
-    @kua_profile_indiff = Kua.new(@indifferent_dodger_lv)
-    @kua_profile_wart = Kua.new(@brain_wartscht_lv)
+    @kua_profile_charlie = KuaProfile.new(@charlie_brown)
+    @kua_profile_melissa = KuaProfile.new(@melissa_dooley_lv)
+    @kua_profile_indiff = KuaProfile.new(@indifferent_dodger_lv)
+    @kua_profile_wart = KuaProfile.new(@brain_wartscht_lv)
 
     # // ****** GROUP 2: Monkey ******     # Monkey - 2004-01-22 -> 2005-02-09
-    @kua_profile_bill = Kua.new(@morris_bill)
-    @kua_profile_sally = Kua.new(@sally_mae_lv)
-    @kua_profile_unhappy = Kua.new(@unhappy_camper_lv)
-    @kua_profile_bertha = Kua.new(@big_bertha_lv)
+    @kua_profile_bill = KuaProfile.new(@morris_bill)
+    @kua_profile_sally = KuaProfile.new(@sally_mae_lv)
+    @kua_profile_unhappy = KuaProfile.new(@unhappy_camper_lv)
+    @kua_profile_bertha = KuaProfile.new(@big_bertha_lv)
   end 
 
   def initialize
@@ -165,12 +165,12 @@ class Tests
 
   def kua_profile
 
-    kua_profile_a = Kua.new(@charlie_brown)
-    kua_profile_b = Kua.new(@melissa_dooley_lv)
-    kua_profile_c = Kua.new(@indifferent_dodger_lv)
-    kua_profile_d = Kua.new(@brain_wartscht_lv)
-    kua_profile_e = Kua.new(@riki_pretty)
-    kua_profile_f = Kua.new(@slim_pickings)
+    kua_profile_a = KuaProfile.new(@charlie_brown)
+    kua_profile_b = KuaProfile.new(@melissa_dooley_lv)
+    kua_profile_c = KuaProfile.new(@indifferent_dodger_lv)
+    kua_profile_d = KuaProfile.new(@brain_wartscht_lv)
+    kua_profile_e = KuaProfile.new(@riki_pretty)
+    kua_profile_f = KuaProfile.new(@slim_pickings)
 
     puts "//+++++++++++++ TEST: Kua Profile +++++++++++++//"
     puts "Profile A: " << kua_profile_a.group << " " << kua_profile_a.kua_number
@@ -192,10 +192,10 @@ class Tests
   end
 
   def birthdate_in_range
-    kua_profile_a = Kua.new(@slim_pickings)
-    kua_profile_b = Kua.new(@modest_mouse)
-    kua_profile_c = Kua.new(@shirley_temple_lv)
-    kua_profile_d = Kua.new(@maniac_lv)
+    kua_profile_a = KuaProfile.new(@slim_pickings)
+    kua_profile_b = KuaProfile.new(@modest_mouse)
+    kua_profile_c = KuaProfile.new(@shirley_temple_lv)
+    kua_profile_d = KuaProfile.new(@maniac_lv)
 
     puts "//+++++++++++++ TEST: Birthdate is In Range +++++++++++++//"
     self.assert_equal(kua_profile_a.is_in_range,false)
