@@ -3,7 +3,7 @@ require "./utilities.rb"
 require "./Profile.rb"
 
 class KuaProfile < Profile
-  attr_accessor :group, :kua_number, :person
+  attr_accessor :group, :kua_number
 
   EAST_GROUP = %w(1 3 4 9)
   START_RANGE = 121
@@ -49,7 +49,6 @@ class KuaProfile < Profile
       end
     end
 
-    self.person = @person
     self.kua_number = kua_num
     if KuaProfile::EAST_GROUP.include? self.kua_number.to_s
       self.group = "East"
