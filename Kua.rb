@@ -2,12 +2,28 @@ require "./Logging.rb"
 require "./utilities.rb"
 require "./Profile.rb"
 
-class KuaProfile < Profile
-  attr_accessor :group, :kua_number
+module Kua
 
+  # Constants
   EAST_GROUP = %w(1 3 4 9)
   START_RANGE = 121
   END_RANGE = 221
+
+  # Setters getters / creational / constructive
+  attr_accessor :birthdate, :gender 
+
+  def kua_number
+    puts "Your number is :" << 5
+  end
+
+  def kua_group
+    puts "Your group is :" << "East"
+  end
+
+  def kua_aupicious_direction
+    puts "Your auscipious direction is : " << "East"
+  end
+
 
   def details
     birthdate = @person.birthdate

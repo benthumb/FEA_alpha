@@ -1,4 +1,3 @@
-require './KuaProfile.rb'
 require './Person.rb'
 require './utilities.rb'
 require './Logging.rb'
@@ -11,55 +10,61 @@ class Tests
   attr_accessor :failed_tests, :passed_tests
 
   def setup_test_data
+      
     # **************** People ****************
-    @charlie_brown = Person.new("Charlie Brown","09121966","New York","male")
-    @charlie_brown_prm = Person.new("Charlie Brown","09121966","New York","male")
-    @psycho_killer = Person.new("Psycho Killer","04011970","New Jersey","female")
-    @riki_pretty = Person.new("Riki Pretty","08271992","Tokyo","female")
-    @slim_pickings = Person.new("Slim Pickings","05281942","Tokyo","male")
-    @modest_mouse = Person.new("Modest Mouse","02141946","Saitama","female")
-    @morris_bill = Person.new("Morris Bill","01212004","New York","male")
-    @charlie_nutz = Person.new("Charlie Nutz","01121967","Seattle","female")
-    @jim_peace = Person.new("Jim Peace","02161984","Washington, DC","male")
-    @tomoko_saito = Person.new("Tomoko Saito","12101973","Hiroshima","female")
-    @mitsuko_matsuei = Person.new("Mitsuko","02111946","Matsuei","female")
-    @jane_krakowski = Person.new("Jane Krakowski","10111968","Chicago","female")
-    @sarah_silverman = Person.new("Sarah Silverman","12011970","Manchester","female")
+     @charlie_brown = Person.new(Profile.new("Charlie Brown","09121966","New York","male"))
+
+     @charlie_brown.kua_number
+     @charlie_brown.kua_group
+     @charlie_brown.kua_auspicious_direction
+
+#    @charlie_brown_prm = Person.new("Charlie Brown","09121966","New York","male")
+#    @psycho_killer = Person.new("Psycho Killer","04011970","New Jersey","female")
+#    @riki_pretty = Person.new("Riki Pretty","08271992","Tokyo","female")
+#    @slim_pickings = Person.new("Slim Pickings","05281942","Tokyo","male")
+#    @modest_mouse = Person.new("Modest Mouse","02141946","Saitama","female")
+#    @morris_bill = Person.new("Morris Bill","01212004","New York","male")
+#    @charlie_nutz = Person.new("Charlie Nutz","01121967","Seattle","female")
+#    @jim_peace = Person.new("Jim Peace","02161984","Washington, DC","male")
+#    @tomoko_saito = Person.new("Tomoko Saito","12101973","Hiroshima","female")
+#    @mitsuko_matsuei = Person.new("Mitsuko","02111946","Matsuei","female")
+#    @jane_krakowski = Person.new("Jane Krakowski","10111968","Chicago","female")
+#    @sarah_silverman = Person.new("Sarah Silverman","12011970","Manchester","female")
 
     # **************** Love Interests ****************
-    @melissa_dooley_lv = LoveInterest.new("Melissa Dooley","03121972","Los Angeles","female")
-    @indifferent_dodger_lv = LoveInterest.new("Indifferent Dodger","07011970","Miami","female")
-    @brain_wartscht_lv= LoveInterest.new("Brain Wartscht","12241997","Cancun","female")
-    @shirley_temple_lv = LoveInterest.new("Shirley Temple","01141901","Hollywood","female")
-    @maniac_lv = LoveInterest.new("Maniac","01271974","Pittsboig","male")
-    @sally_mae_lv = LoveInterest.new("Sally Mae","01222004","Los Angeles","female")
-    @unhappy_camper_lv = LoveInterest.new("Unhappy Camper","03122004","Miami","female")
-    @big_bertha_lv = LoveInterest.new("Big Bertha","02082005","Cancun","female")
+#    @melissa_dooley_lv = LoveInterest.new("Melissa Dooley","03121972","Los Angeles","female")
+#    @indifferent_dodger_lv = LoveInterest.new("Indifferent Dodger","07011970","Miami","female")
+#    @brain_wartscht_lv= LoveInterest.new("Brain Wartscht","12241997","Cancun","female")
+#    @shirley_temple_lv = LoveInterest.new("Shirley Temple","01141901","Hollywood","female")
+#    @maniac_lv = LoveInterest.new("Maniac","01271974","Pittsboig","male")
+#    @sally_mae_lv = LoveInterest.new("Sally Mae","01222004","Los Angeles","female")
+#    @unhappy_camper_lv = LoveInterest.new("Unhappy Camper","03122004","Miami","female")
+#    @big_bertha_lv = LoveInterest.new("Big Bertha","02082005","Cancun","female")
     
     # **************** Birth Dates ****************
-    @july_test_birthdate1 = '07041974'
-    @nov_test_birthdate2 = '11232001'
-    @jan_test_birthdate3 = '01141902'
+#    @july_test_birthdate1 = '07041974'
+#    @nov_test_birthdate2 = '11232001'
+#    @jan_test_birthdate3 = '01141902'
 
     # **************** Kua Profile ****************
-    @kua_profile_nutz = KuaProfile.new(@charlie_nutz)
-    @kua_profile_peace = KuaProfile.new(@jim_peace)
-    @kua_profile_tomoko = KuaProfile.new(@tomoko_saito)
-    @kua_profile_mitsuko = KuaProfile.new(@mitsuko_matsuei)
-    @kua_profile_kraw = KuaProfile.new(@jane_krakowski)
-    @kua_profile_sarah = KuaProfile.new(@sarah_silverman)
+
+#    @kua_profile_peace = KuaProfile.new(@jim_peace)
+#    @kua_profile_tomoko = KuaProfile.new(@tomoko_saito)
+#    @kua_profile_mitsuko = KuaProfile.new(@mitsuko_matsuei)
+#    @kua_profile_kraw = KuaProfile.new(@jane_krakowski)
+#    @kua_profile_sarah = KuaProfile.new(@sarah_silverman)
 
     # // ****** GROUP 1: Rooster ******     # Rooster - 1957-01-31 -> 1958-02-18
-    @kua_profile_charlie = KuaProfile.new(@charlie_brown)
-    @kua_profile_melissa = KuaProfile.new(@melissa_dooley_lv)
-    @kua_profile_indiff = KuaProfile.new(@indifferent_dodger_lv)
-    @kua_profile_wart = KuaProfile.new(@brain_wartscht_lv)
+#    @kua_profile_charlie = KuaProfile.new(@charlie_brown)
+#    @kua_profile_melissa = KuaProfile.new(@melissa_dooley_lv)
+#    @kua_profile_indiff = KuaProfile.new(@indifferent_dodger_lv)
+#    @kua_profile_wart = KuaProfile.new(@brain_wartscht_lv)
 
     # // ****** GROUP 2: Monkey ******     # Monkey - 2004-01-22 -> 2005-02-09
-    @kua_profile_bill = KuaProfile.new(@morris_bill)
-    @kua_profile_sally = KuaProfile.new(@sally_mae_lv)
-    @kua_profile_unhappy = KuaProfile.new(@unhappy_camper_lv)
-    @kua_profile_bertha = KuaProfile.new(@big_bertha_lv)
+#    @kua_profile_bill = KuaProfile.new(@morris_bill)
+#    @kua_profile_sally = KuaProfile.new(@sally_mae_lv)
+#    @kua_profile_unhappy = KuaProfile.new(@unhappy_camper_lv)
+#    @kua_profile_bertha = KuaProfile.new(@big_bertha_lv)
   end 
 
   def initialize
@@ -327,13 +332,13 @@ class Tests
 
   def run
     self.setup_test_data
-    self.create_person_instance
-    self.create_love_interest_instance
-    self.kua_profile
-    self.birthdate_in_range
-    self.year_lookup_hash
-    self.calendar_year
-    self.kua_profile_details
+#    self.create_person_instance
+#    self.create_love_interest_instance
+#    self.kua_profile
+#    self.birthdate_in_range
+#    self.year_lookup_hash
+#    self.calendar_year
+#    self.kua_profile_details
     puts "*************** Test Stats ***************"
     puts "Total Tests: " << (self.passed_tests + self.failed_tests).to_s
     puts "Passed Tests: " << self.passed_tests.to_s
