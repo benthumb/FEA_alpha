@@ -241,10 +241,14 @@ class Tests
     # Monkey - 2004-01-22 -> 2005-02-09
 
     puts "//+++++++++++++ TEST: Det Calendar Yr Beta +++++++++++++//"
-    year_1 = @kua_profile_charlie.calendar_yr_calc_beta(get_year_lookup_hash(@charlie_brown.birthdate))
-    year_2 = @kua_profile_melissa.calendar_yr_calc_beta(get_year_lookup_hash(@melissa_dooley_lv.birthdate))
-    year_3 = @kua_profile_indiff.calendar_yr_calc_beta(get_year_lookup_hash(@indifferent_dodger_lv.birthdate))
-    year_4 = @kua_profile_wart.calendar_yr_calc_beta(get_year_lookup_hash(@brain_wartscht_lv.birthdate))
+    year_1 = @kua_profile_charlie.calendar_yr_calc_beta(
+	    get_year_lookup_hash(@charlie_brown.birthdate))
+    year_2 = @kua_profile_melissa.calendar_yr_calc_beta(
+	    get_year_lookup_hash(@melissa_dooley_lv.birthdate))
+    year_3 = @kua_profile_indiff.calendar_yr_calc_beta(
+	    get_year_lookup_hash(@indifferent_dodger_lv.birthdate))
+    year_4 = @kua_profile_wart.calendar_yr_calc_beta(
+	    get_year_lookup_hash(@brain_wartscht_lv.birthdate))
 
     logger.debug "year 1957: " << year_1
     logger.debug "year 1957: " << year_2
@@ -256,10 +260,14 @@ class Tests
     assert_equal(year_3,"1957")
     assert_equal(year_4,"1958")
 
-    year_5 = @kua_profile_bill.calendar_yr_calc_beta(get_year_lookup_hash(@morris_bill.birthdate))
-    year_6 = @kua_profile_sally.calendar_yr_calc_beta(get_year_lookup_hash(@sally_mae_lv.birthdate))
-    year_7 = @kua_profile_unhappy.calendar_yr_calc_beta(get_year_lookup_hash(@unhappy_camper_lv.birthdate))
-    year_8 = @kua_profile_bertha.calendar_yr_calc_beta(get_year_lookup_hash(@big_bertha_lv.birthdate))
+    year_5 = @kua_profile_bill.calendar_yr_calc_beta(
+	    get_year_lookup_hash(@morris_bill.birthdate))
+    year_6 = @kua_profile_sally.calendar_yr_calc_beta(
+	    get_year_lookup_hash(@sally_mae_lv.birthdate))
+    year_7 = @kua_profile_unhappy.calendar_yr_calc_beta(
+	    get_year_lookup_hash(@unhappy_camper_lv.birthdate))
+    year_8 = @kua_profile_bertha.calendar_yr_calc_beta(
+	    get_year_lookup_hash(@big_bertha_lv.birthdate))
 
     logger.debug "year 2004: " << year_5
     logger.debug "year 2004: " << year_6
