@@ -15,9 +15,9 @@ class Tests
     # **************** People ****************
      @charlie_brown = Person.new(Profile.new("Charlie Brown","09121966","New York","male"))
 #     @profile_charlie = Profile.new("Charlie Brown","09121966","New York","male")
-     @charlie_brown.kua_number
-     @charlie_brown.kua_group
-     @charlie_brown.kua_auspicious_direction
+     logger.debug "Kua number " << @charlie_brown.kua_number
+     logger.debug "Kua group " << @charlie_brown.kua_group
+     logger.debug "Kua auspicious direction " << @charlie_brown.kua_auspicious_direction
 
 #    @charlie_brown_prm = Person.new("Charlie Brown","09121966","New York","male")
 #    @psycho_killer = Person.new("Psycho Killer","04011970","New Jersey","female")

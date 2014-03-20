@@ -12,7 +12,6 @@ module Kua
   @kua_auspicious_direction
   @birth_year
   @last_two_digits
-  @not_in_range = true
   # ***************************** Constants **************************** 
   EAST_GROUP = %w(1 3 4 9)
   START_RANGE = 121
@@ -25,6 +24,7 @@ module Kua
   attr_reader :kua_number, :kua_group, :kua_auspicious_direction
 
   def kua_init(birthdate, gender) 
+    @not_in_range = true
     @birthdate = birthdate
     @gender = gender
     set_birth_year if is_in_range 
@@ -42,6 +42,11 @@ module Kua
   end
 
   def set_last_two_digits_birth_year 
+	  logger.debug "Sanity check: " << 
+	  "not in range - " << 
+	  @not_in_range.to_s << 
+	  " first digit of birthdate: " << 
+	  @birthdate[1].to_s
     if @not_in_range && @birthdate[1] != "1"
       logger.debug "Wasn't in range and NOT in January!"
       @last_two_digits = @birthdate[6..7]
@@ -74,16 +79,16 @@ module Kua
 
   def set_group
     if Kua::EAST_GROUP.include? @kua_number.to_s
-      #@group = "East"
-      @group = :east 
+      @kua_group = "East"
+      #@group = :east 
     else
-      @group = "West"
+      @kua_group = "West"
     end
-    logger.debug "Profile details: " << @group << ", " << @kua_number
+    logger.debug "Profile details: " << @kua_group << ", " << @kua_number
   end
   
   def set_auspicious_direction
-    @auspicious_direction = "East"  
+    @kua_auspicious_direction = "East"  
   end
 
   def is_in_range
