@@ -1,15 +1,16 @@
+require './Kua.rb'
+
 class Person
   include Kua
   attr_reader :profile
   def initialize(profile)
     @profile = profile
-    Kua.birthdate = @profile.birthdate
-    Kua.gender = @profile.gender
+    self.birthdate = @profile.birthdate 
+    self.gender = @profile.gender
   end
 end
 
 class LoveInterest < Person
-
   attr_accessor :compatibility_score
   def is_compatible
     if compatibility_score >= 70

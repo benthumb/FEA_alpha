@@ -3,39 +3,42 @@ require "./utilities.rb"
 require "./Profile.rb"
 
 module Kua
+  include Logging
+  include Utilities
 
-  # Constants
+  # ************************ Instance Variables ************************ 
+  @kua_number
+  @group
+  @auspicious_direction
+
+  # ***************************** Constants **************************** 
   EAST_GROUP = %w(1 3 4 9)
   START_RANGE = 121
   END_RANGE = 221
 
-  # Setters getters / creational / constructive
+  # ************ Setters getters / creational / constructive ***********
   attr_accessor :birthdate, :gender 
 
   def kua_number
-    puts "Your number is :" << 5
+    puts "Your number is :" << "5"
   end
 
   def kua_group
     puts "Your group is :" << "East"
   end
 
-  def kua_aupicious_direction
-    puts "Your auscipious direction is : " << "East"
+  def kua_auspicious_direction
+    puts "Your auspicious direction is : " << "East"
   end
 
-
   def details
-    birthdate = @person.birthdate
-    gender = @person.gender
     kua_num = ""
     wasnt_in_range = true
 
-
     if is_in_range
-      logger.debug "Birthday is in range: " << birthdate
-      birth_yr = det_calendar_yr(birthdate)
-      logger.debug "Calculated calendar year: " << birthdate
+      logger.debug "Birthday is in range: " << @birthdate
+      birth_yr = det_calendar_yr(@birthdate)
+      logger.debug "Calculated calendar year: " << @birthdate
       wasnt_in_range = false
     end
 
@@ -65,22 +68,22 @@ module Kua
       end
     end
 
-    self.kua_number = kua_num
-    if KuaProfile::EAST_GROUP.include? self.kua_number.to_s
-      self.group = "East"
+    @kua_number = kua_num
+    if Kua::EAST_GROUP.include? @kua_number.to_s
+      @group = "East"
     else
-      self.group = "West"
+      @group = "West"
     end
-    logger.debug "Profile details: " << self.group << ", " << self.kua_number
+    logger.debug "Profile details: " << @group << ", " << @kua_number
   end
 
   def is_in_range
-    birth_d = @person.birthdate
+    birth_d = @birthdate
     test_val = birth_d[0,4]
 
     if test_val[0] != "1" && 
-      (test_val[1..4].to_i >= KuaProfile::START_RANGE && 
-       test_val[1..4].to_i <= KuaProfile::END_RANGE)
+      (test_val[1..4].to_i >= Kua::START_RANGE && 
+       test_val[1..4].to_i <= Kua::END_RANGE)
       in_range = true
     else
       in_range = false
