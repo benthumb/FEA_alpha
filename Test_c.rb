@@ -18,7 +18,6 @@ class Tests
      @charlie_brown.kua_number
      @charlie_brown.kua_group
      @charlie_brown.kua_auspicious_direction
-     @charlie_brown.details
 
 #    @charlie_brown_prm = Person.new("Charlie Brown","09121966","New York","male")
 #    @psycho_killer = Person.new("Psycho Killer","04011970","New Jersey","female")

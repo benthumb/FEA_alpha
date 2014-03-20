@@ -5,8 +5,7 @@ class Person
   attr_reader :profile
   def initialize(profile)
     @profile = profile
-    self.birthdate = @profile.birthdate 
-    self.gender = @profile.gender
+    self.kua_init(@profile.birthdate, @profile.gender)
   end
 end
 
