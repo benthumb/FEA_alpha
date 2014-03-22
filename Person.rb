@@ -1,9 +1,11 @@
 require './Kua.rb'
 
 class Person
+  @profile # is this necessary : isn't it implicitly lodged here?
   include Kua
   attr_reader :profile
-  def initialize(profile)
+
+  def set_profile(profile)
     @profile = profile
     self.kua_init(@profile.birthdate, @profile.gender)
   end

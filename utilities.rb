@@ -52,11 +52,11 @@ module Utilities
     end
   end
 
-  def calendar_yr_calc_beta(dates_hash)
+  def calendar_yr_calc_beta(dates_hash, birth_date)
     random_val = 1
     last_day_jan = 31
     thirty_days = 30
-    b_date = @person.birthdate
+    b_date = birth_date 
 
     yr_idx_end = b_date.length-1
     yr_idx_strt = yr_idx_end-3
