@@ -310,12 +310,16 @@ class Tests
     # Monkey - 2004-01-22 -> 2005-02-09
 
     puts "//+++++++++++++ TEST: Det Calendar Yr Beta +++++++++++++//"
+    @charlie_brown.profile.birthdate = '01191957' 
     charlie_brown_b = @charlie_brown.profile.birthdate 
     year_1 = calendar_yr_calc_beta(get_year_lookup_hash(charlie_brown_b), charlie_brown_b)
+    @melissa_dooley_lv.profile.birthdate = '01231958' 
     melissa_dooley_lv_b = @melissa_dooley_lv.profile.birthdate 
     year_2 = calendar_yr_calc_beta(get_year_lookup_hash(melissa_dooley_lv_b), melissa_dooley_lv_b)
+    @indifferent_dodger_lv.profile.birthdate = '12221957' 
     indifferent_dodger_lv_b = @indifferent_dodger_lv.profile.birthdate 
     year_3 = calendar_yr_calc_beta(get_year_lookup_hash(indifferent_dodger_lv_b), indifferent_dodger_lv_b)
+    @brain_wartscht_lv.profile.birthdate = '02011958' 
     brain_wartscht_lv_b = @brain_wartscht_lv.profile.birthdate 
     year_4 = calendar_yr_calc_beta(get_year_lookup_hash(brain_wartscht_lv_b), brain_wartscht_lv_b)
 
@@ -329,12 +333,16 @@ class Tests
     assert_equal(year_3,"1957")
     assert_equal(year_4,"1958")
 
+    @morris_bill.profile.birthdate = '01192004' 
     morris_bill_b = @morris_bill.profile.birthdate 
     year_5 = calendar_yr_calc_beta(get_year_lookup_hash(morris_bill_b), morris_bill_b)
+    @sally_mae_lv.profile.birthdate = '01112005' 
     sally_mae_lv_b = @sally_mae_lv.profile.birthdate 
     year_6 = calendar_yr_calc_beta(get_year_lookup_hash(sally_mae_lv_b), sally_mae_lv_b)
+    @unhappy_camper_lv.profile.birthdate = '01312004' 
     unhappy_camper_lv_b = @unhappy_camper_lv.profile.birthdate 
     year_7 = calendar_yr_calc_beta(get_year_lookup_hash(unhappy_camper_lv_b), unhappy_camper_lv_b)
+    @big_bertha_lv.profile.birthdate = '01182005' 
     big_bertha_lv_b = @big_bertha_lv.profile.birthdate 
     year_8 = calendar_yr_calc_beta(get_year_lookup_hash(big_bertha_lv_b), big_bertha_lv_b)
 
