@@ -110,25 +110,6 @@ class Tests
     @july_test_birthdate1 = '07041974'
     @nov_test_birthdate2 = '11232001'
     @jan_test_birthdate3 = '01141902'
-
-    # **************** Kua Profile ****************
-#    @kua_profile_peace = KuaProfile.new(@jim_peace)
-#    @kua_profile_tomoko = KuaProfile.new(@tomoko_saito)
-#    @kua_profile_mitsuko = KuaProfile.new(@mitsuko_matsuei)
-#    @kua_profile_kraw = KuaProfile.new(@jane_krakowski)
-#    @kua_profile_sarah = KuaProfile.new(@sarah_silverman)
-
-    # // ****** GROUP 1: Rooster ******     # Rooster - 1957-01-31 -> 1958-02-18
-#    @kua_profile_charlie = KuaProfile.new(@charlie_brown)
-#    @kua_profile_melissa = KuaProfile.new(@melissa_dooley_lv)
-#    @kua_profile_indiff = KuaProfile.new(@indifferent_dodger_lv)
-#    @kua_profile_wart = KuaProfile.new(@brain_wartscht_lv)
-#
-#    # // ****** GROUP 2: Monkey ******     # Monkey - 2004-01-22 -> 2005-02-09
-#    @kua_profile_bill = KuaProfile.new(@morris_bill)
-#    @kua_profile_sally = KuaProfile.new(@sally_mae_lv)
-#    @kua_profile_unhappy = KuaProfile.new(@unhappy_camper_lv)
-#    @kua_profile_bertha = KuaProfile.new(@big_bertha_lv)
   end 
 
   def initialize
@@ -313,12 +294,15 @@ class Tests
     @charlie_brown.profile.birthdate = '01191957' 
     charlie_brown_b = @charlie_brown.profile.birthdate 
     year_1 = calendar_yr_calc_beta(get_year_lookup_hash(charlie_brown_b), charlie_brown_b)
+
     @melissa_dooley_lv.profile.birthdate = '01231958' 
     melissa_dooley_lv_b = @melissa_dooley_lv.profile.birthdate 
     year_2 = calendar_yr_calc_beta(get_year_lookup_hash(melissa_dooley_lv_b), melissa_dooley_lv_b)
+
     @indifferent_dodger_lv.profile.birthdate = '12221957' 
     indifferent_dodger_lv_b = @indifferent_dodger_lv.profile.birthdate 
     year_3 = calendar_yr_calc_beta(get_year_lookup_hash(indifferent_dodger_lv_b), indifferent_dodger_lv_b)
+
     @brain_wartscht_lv.profile.birthdate = '02011958' 
     brain_wartscht_lv_b = @brain_wartscht_lv.profile.birthdate 
     year_4 = calendar_yr_calc_beta(get_year_lookup_hash(brain_wartscht_lv_b), brain_wartscht_lv_b)
@@ -333,31 +317,44 @@ class Tests
     assert_equal(year_3,"1957")
     assert_equal(year_4,"1958")
 
+    # Phase in : new implementation of algo will be worked in from here
     @morris_bill.profile.birthdate = '01192004' 
     morris_bill_b = @morris_bill.profile.birthdate 
-    year_5 = calendar_yr_calc_beta(get_year_lookup_hash(morris_bill_b), morris_bill_b)
+    dates_hash = get_year_lookup_hash(morris_bill_b)
+    year_5_tst = dates_to_compare(dates_hash, morris_bill_b)
+    year_5 = calendar_yr_calc_beta(dates_hash, morris_bill_b)
+
     @sally_mae_lv.profile.birthdate = '01112005' 
     sally_mae_lv_b = @sally_mae_lv.profile.birthdate 
-    year_6 = calendar_yr_calc_beta(get_year_lookup_hash(sally_mae_lv_b), sally_mae_lv_b)
+    dates_hash = get_year_lookup_hash(sally_mae_lv_b)
+    year_6_tst = dates_to_compare(dates_hash, sally_mae_lv_b)
+    year_6 = calendar_yr_calc_beta(dates_hash, sally_mae_lv_b)
+
     @unhappy_camper_lv.profile.birthdate = '01312004' 
     unhappy_camper_lv_b = @unhappy_camper_lv.profile.birthdate 
-    year_7 = calendar_yr_calc_beta(get_year_lookup_hash(unhappy_camper_lv_b), unhappy_camper_lv_b)
+    dates_hash = get_year_lookup_hash(unhappy_camper_lv_b)
+    year_7_tst = dates_to_compare(dates_hash, unhappy_camper_lv_b)
+    year_7 = calendar_yr_calc_beta(dates_hash, unhappy_camper_lv_b)
+
     @big_bertha_lv.profile.birthdate = '01182005' 
     big_bertha_lv_b = @big_bertha_lv.profile.birthdate 
-    year_8 = calendar_yr_calc_beta(get_year_lookup_hash(big_bertha_lv_b), big_bertha_lv_b)
+    dates_hash = get_year_lookup_hash(big_bertha_lv_b)
+    year_8_tst = dates_to_compare(dates_hash, big_bertha_lv_b)
+    year_8 = calendar_yr_calc_beta(dates_hash, big_bertha_lv_b)
 
-    logger.debug "year 2004: " << year_5
-    logger.debug "year 2004: " << year_6
-    logger.debug "year 2004: " << year_7
-    logger.debug "year 2005: " << year_8
+    logger.debug "year 2004: " << year_5_tst
+    logger.debug "year 2004: " << year_6_tst
+    logger.debug "year 2004: " << year_7_tst
+    logger.debug "year 2005: " << year_8_tst
 
-    assert_equal(year_5,"2003")
-    assert_equal(year_6,"2004")
-    assert_equal(year_7,"2004")
-    assert_equal(year_8,"2004")
+    assert_equal(year_5_tst,"2003")
+    assert_equal(year_6_tst,"2004")
+    assert_equal(year_7_tst,"2004")
+    assert_equal(year_8_tst,"2004")
   end
 
   def kua_dimension_details
+  # for comparison - http://redlotusletter.com/resources/kua-calculator/
     puts "//+++++++++++++ TEST: Kua Profile - details +++++++++++++//"
     puts "Nutz's kua number is: " << @charlie_nutz.kua_number
     puts "Nutz's group is: " << @charlie_nutz.kua_group
@@ -392,7 +389,7 @@ class Tests
     puts "Sarah's kua number is: " << @sarah_silverman.kua_number
     puts "Sarah's kua_group is: " << @sarah_silverman.kua_group
 
-    assert_equal(@sarah_silverman.kua_number, "1")
+    assert_equal(@sarah_silverman.kua_number, "3")
     assert_equal(@sarah_silverman.kua_group, "East")
   end
 
@@ -414,4 +411,3 @@ end
 
 tests = Tests.new()
 tests.run
-

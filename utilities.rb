@@ -1,4 +1,5 @@
 require "./Logging.rb"
+require 'date'
 
 module Utilities
 
@@ -97,6 +98,7 @@ module Utilities
     end
 
     new_moon_date_format = convert[date_new_moon]
+    logger.debug "New moon: formatted date - " << new_moon_date_format.to_s 
 
     # is date (new moon) before 121
     if new_moon_date_format.to_i < 121
@@ -115,6 +117,66 @@ module Utilities
     else
       return b_date[4..7]
     end
+  end
+
+  def date_compare(date_to_compare)
+    parsed_date_object = parse_date(date_to_compare)
+    logger.debug "Date to compare is earlier!" if parsed_date_object < Date.new(2010,1,22) 
+    logger.debug "Date to compare is later!" if parsed_date_object > Date.new(2010,1,22) 
+  end
+
+  # New algo implementation : will phase out <calendar_yr_calc_beta>
+  def dates_to_compare(dates_hash, date_to_compare)
+  # Basic algo: if birthdate < new moon date OR earliest possible new year's, 
+  #   then birth year goes to prior year
+  # Otherwise : if birthdate > new moon date, then
+  # 1) estimate/calculate date of new year's celebration
+  # 2) compare birthdate against above : < NYC date, goes to prior year; otherwise, goest to current year
+    random_val = 1
+    last_day_jan = 31
+    thirty_days = 30
+#    b_date = birth_date 
+    b_date = date_to_compare 
+
+    yr_idx_end = b_date.length-1
+    yr_idx_strt = yr_idx_end-3
+    
+    b_year = date_to_compare[yr_idx_strt..yr_idx_end]
+    earliest_ny_celebration = "0121" + b_year 
+    parsed_date_earliest = parse_date(earliest_ny_celebration) 
+
+    logger.debug "*********** b_year: " << b_year 
+    date_new_moon = dates_hash[b_year]
+    logger.debug "*********** Date of new moon: " << date_new_moon 
+
+    new_moon_date_arr = date_new_moon.split(" ");
+    new_moon_month = new_moon_date_arr[0] == "Jan" ? "01":"02"
+    new_moon_day = new_moon_date_arr[1]
+    new_moon_date = new_moon_month + new_moon_day + b_year 
+    logger.debug "*********** formatted new moon date: " << new_moon_date
+
+    parsed_date_object_compare = parse_date(date_to_compare)
+    parsed_date_object_new_moon = parse_date(new_moon_date)
+    logger.debug "Date to compare is earlier!" if parsed_date_object_compare < parsed_date_object_new_moon
+    logger.debug "Date to compare is later!" if parsed_date_object_compare > parsed_date_object_new_moon
+  
+    # tbd : elsif clause - compare against calculated new year's celeb date ...   
+    if(parsed_date_object_compare < parsed_date_earliest || 
+       parsed_date_object_compare < parsed_date_object_new_moon)
+      prior_year = "" << (b_date[4..7].to_i - 1).to_s
+    else
+      same_year = b_date[4..7]
+    end
+  end
+
+  def parse_date(date_string)
+    month = date_string[0..1].to_i 
+    logger.debug "Month: " << month.to_s
+    day = date_string[2..3].to_i 
+    logger.debug "Day: " << day.to_s
+    year = date_string[4..7].to_i 
+    logger.debug "Year: " << year.to_s 
+    Date.new(year,month,day)
   end
 end
 
