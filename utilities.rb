@@ -65,6 +65,7 @@ module Utilities
 
     date_new_moon = dates_hash[b_year]
 
+    # --------------------------new year's celebration date algo
     algorithm_1 = lambda do |date_tbd|
       var_nmd = date_tbd[4..5].to_i
       var_temp = var_nmd + thirty_days
@@ -76,7 +77,8 @@ module Utilities
         return ("2" << new_yr_date.to_s).to_i
       end
     end
-
+    # --------------------------new year's celebration date algo
+    
     convert = lambda do |date_to_convert|
       logger.debug "converting date: " << date_to_convert.to_s
       test_s = date_to_convert.chomp
@@ -162,20 +164,60 @@ module Utilities
   
     # tbd : elsif clause - compare against calculated new year's celeb date ...   
     if(parsed_date_object_compare < parsed_date_earliest || 
-       parsed_date_object_compare < parsed_date_object_new_moon)
+       parsed_date_object_compare < parsed_date_object_new_moon ||
+       parsed_date_object_compare < new_years_day(new_moon_date, parsed_date_earliest.year))
       prior_year = "" << (b_date[4..7].to_i - 1).to_s
     else
       same_year = b_date[4..7]
     end
   end
 
+  def new_years_day(new_moon_date, year)
+    thirty_days = 30
+    last_day_jan = 31
+    logger.debug ">>>>>>>>> New moon date: " << new_moon_date
+    var_nmd = new_moon_date[4..5].to_i
+    var_temp = var_nmd + thirty_days
+    logger.debug "algo 1 ... var_temp value: " << var_temp.to_s
+    if var_temp == 31
+      logger.debug "returning var_temp value: " << "1" << var_temp.to_s
+      nyc_date = parse_date("1" + var_temp + year)
+#      return ("1" << var_temp.to_s).to_i
+    else
+      new_yr_date = var_temp - last_day_jan
+      logger.debug "returning new_yr_date: " << "2" << new_yr_date.to_s
+      nyc_date = parse_date("2" << new_yr_date.to_s << year.to_s)
+#      return ("2" << new_yr_date.to_s).to_i
+    end
+  end
+
   def parse_date(date_string)
-    month = date_string[0..1].to_i 
-    logger.debug "Month: " << month.to_s
-    day = date_string[2..3].to_i 
-    logger.debug "Day: " << day.to_s
-    year = date_string[4..7].to_i 
-    logger.debug "Year: " << year.to_s 
+    month, day, year = ""
+    if(date_string.length == 6)
+      logger.debug "Date to parse 6 chars: " << date_string
+      month = date_string[0].to_i 
+      logger.debug "Month: " << month.to_s
+      day = date_string[1].to_i 
+      logger.debug "Day: " << day.to_s
+      year = date_string[2..5].to_i 
+      logger.debug "Year: " << year.to_s 
+    elsif(date_string.length == 7)
+      logger.debug "Date to parse 7 chars: " << date_string
+      month = date_string[0].to_i 
+      logger.debug "Month: " << month.to_s
+      day = date_string[1..2].to_i 
+      logger.debug "Day: " << day.to_s
+      year = date_string[3..6].to_i 
+      logger.debug "Year: " << year.to_s 
+    else
+      logger.debug "Date to parse 8 chars: " << date_string
+      month = date_string[0..1].to_i 
+      logger.debug "Month: " << month.to_s
+      day = date_string[2..3].to_i 
+      logger.debug "Day: " << day.to_s
+      year = date_string[4..7].to_i 
+      logger.debug "Year: " << year.to_s 
+    end
     Date.new(year,month,day)
   end
 end
