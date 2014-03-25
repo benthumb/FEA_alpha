@@ -147,6 +147,7 @@ module Utilities
     earliest_ny_celebration = "0121" + b_year 
     parsed_date_earliest = parse_date(earliest_ny_celebration) 
 
+    logger.debug "*********** date_to_compare: " << date_to_compare 
     logger.debug "*********** b_year: " << b_year 
     date_new_moon = dates_hash[b_year]
     logger.debug "*********** Date of new moon: " << date_new_moon 
@@ -158,7 +159,8 @@ module Utilities
     logger.debug "*********** formatted new moon date: " << new_moon_date
 
     parsed_date_object_compare = parse_date(date_to_compare)
-    parsed_date_object_new_moon = parse_date(new_moon_date)
+#    parsed_date_object_new_moon = parse_date(new_moon_date)
+    parsed_date_object_new_moon =  Date.new(b_year.to_i,new_moon_month.to_i,new_moon_day.to_i)
     logger.debug "Date to compare is earlier!" if parsed_date_object_compare < parsed_date_object_new_moon
     logger.debug "Date to compare is later!" if parsed_date_object_compare > parsed_date_object_new_moon
   
@@ -192,6 +194,7 @@ module Utilities
   end
 
   def parse_date(date_string)
+    logger.debug "Parse date: date_string: " << date_string
     month, day, year = ""
     if(date_string.length == 6)
       logger.debug "Date to parse 6 chars: " << date_string
