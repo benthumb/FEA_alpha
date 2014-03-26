@@ -73,6 +73,10 @@ class Tests
     @sarah_silverman = Person.new()
     @sarah_silverman.set_profile sarah_profile 
 
+    colin_profile = Profile.new("Colin Powell","04051937","Queens","male")
+    @colin_powell  = Person.new()
+    @colin_powell.set_profile colin_profile 
+
     # **************** Love Interests ****************
     @melissa_profile = Profile.new("Melissa Dooley","03121972","Los Angeles","female")
     @melissa_dooley_lv = LoveInterest.new()
@@ -293,19 +297,23 @@ class Tests
     puts "//+++++++++++++ TEST: Det Calendar Yr Beta +++++++++++++//"
     @charlie_brown.profile.birthdate = '01191957' 
     charlie_brown_b = @charlie_brown.profile.birthdate 
-    year_1 = calendar_yr_calc_beta(get_year_lookup_hash(charlie_brown_b), charlie_brown_b)
+    dates_hash = get_year_lookup_hash(charlie_brown_b) 
+    year_1 = dates_to_compare(dates_hash, charlie_brown_b)
 
     @melissa_dooley_lv.profile.birthdate = '01231958' 
     melissa_dooley_lv_b = @melissa_dooley_lv.profile.birthdate 
-    year_2 = calendar_yr_calc_beta(get_year_lookup_hash(melissa_dooley_lv_b), melissa_dooley_lv_b)
+    dates_hash = get_year_lookup_hash(melissa_dooley_lv_b) 
+    year_2 = dates_to_compare(dates_hash, melissa_dooley_lv_b)
 
     @indifferent_dodger_lv.profile.birthdate = '12221957' 
     indifferent_dodger_lv_b = @indifferent_dodger_lv.profile.birthdate 
-    year_3 = calendar_yr_calc_beta(get_year_lookup_hash(indifferent_dodger_lv_b), indifferent_dodger_lv_b)
+    dates_hash = get_year_lookup_hash(indifferent_dodger_lv_b) 
+    year_3 = dates_to_compare(dates_hash, indifferent_dodger_lv_b)
 
     @brain_wartscht_lv.profile.birthdate = '02011958' 
     brain_wartscht_lv_b = @brain_wartscht_lv.profile.birthdate 
-    year_4 = calendar_yr_calc_beta(get_year_lookup_hash(brain_wartscht_lv_b), brain_wartscht_lv_b)
+    dates_hash = get_year_lookup_hash(brain_wartscht_lv_b) 
+    year_4 = dates_to_compare(dates_hash, brain_wartscht_lv_b)
 
     logger.debug "year 1957: " << year_1
     logger.debug "year 1957: " << year_2
@@ -322,25 +330,21 @@ class Tests
     morris_bill_b = @morris_bill.profile.birthdate 
     dates_hash = get_year_lookup_hash(morris_bill_b)
     year_5_tst = dates_to_compare(dates_hash, morris_bill_b)
-    year_5 = calendar_yr_calc_beta(dates_hash, morris_bill_b)
 
     @sally_mae_lv.profile.birthdate = '01112005' 
     sally_mae_lv_b = @sally_mae_lv.profile.birthdate 
     dates_hash = get_year_lookup_hash(sally_mae_lv_b)
     year_6_tst = dates_to_compare(dates_hash, sally_mae_lv_b)
-    year_6 = calendar_yr_calc_beta(dates_hash, sally_mae_lv_b)
 
     @unhappy_camper_lv.profile.birthdate = '01312004' 
     unhappy_camper_lv_b = @unhappy_camper_lv.profile.birthdate 
     dates_hash = get_year_lookup_hash(unhappy_camper_lv_b)
     year_7_tst = dates_to_compare(dates_hash, unhappy_camper_lv_b)
-    year_7 = calendar_yr_calc_beta(dates_hash, unhappy_camper_lv_b)
 
     @big_bertha_lv.profile.birthdate = '01182005' 
     big_bertha_lv_b = @big_bertha_lv.profile.birthdate 
     dates_hash = get_year_lookup_hash(big_bertha_lv_b)
     year_8_tst = dates_to_compare(dates_hash, big_bertha_lv_b)
-    year_8 = calendar_yr_calc_beta(dates_hash, big_bertha_lv_b)
 
     logger.debug "year 2004: " << year_5_tst
     logger.debug "year 2004: " << year_6_tst
@@ -391,6 +395,12 @@ class Tests
 
     assert_equal(@sarah_silverman.kua_number, "3")
     assert_equal(@sarah_silverman.kua_group, "East")
+
+    puts "Colin's kua number is: " << @colin_powell.kua_number
+    puts "Colin's kua_group is: " << @colin_powell.kua_group
+
+    assert_equal(@colin_powell.kua_number, "9")
+    assert_equal(@colin_powell.kua_group, "East")
   end
 
   def run
@@ -400,7 +410,7 @@ class Tests
     self.kua_profile
     self.birthdate_in_range
     self.year_lookup_hash
-    #self.calendar_year
+    self.calendar_year
     self.kua_dimension_details
     puts "*************** Test Stats ***************"
     puts "Total Tests: " << (self.passed_tests + self.failed_tests).to_s

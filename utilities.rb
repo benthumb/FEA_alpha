@@ -91,7 +91,9 @@ module Utilities
     # ----------- Date of new moon
     parsed_date_object_new_moon =  Date.new(b_year.to_i,new_moon_month.to_i,new_moon_day.to_i)
 
-    if(parsed_date_object_compare < new_years_day(parsed_date_object_new_moon))    
+    ny_date_calculated = new_years_day(parsed_date_object_new_moon)
+
+    if(parsed_date_object_compare < ny_date_calculated)    
       prior_year = "" << (date_to_compare[4..7].to_i - 1).to_s
     else
       same_year = date_to_compare[4..7]
@@ -128,19 +130,23 @@ module Utilities
     last_day_jan = 31          
 
     # the DAY in date of New Year's  
-    ny_day = (new_moon_date.day + thirty_days) % last_day_jan  
+    day_candidate = (new_moon_date.day + thirty_days) % last_day_jan
+    ny_day = day_candidate != 0 ? day_candidate : 31  
+
+    # the MONTH in date of New Year's  
+    ny_month = day_candidate == 0 ? earliest_ny_month : latest_ny_month
 
     # Is New Moon < (earlier) than Jan 21 YIQ : Date.new(YIQ,JAN,EARLIEST_DAY)
 
     # Does the date of the new moon fall before Jan, 21 YIQ 
-    calculated_new_years_day = Date.new(yiq, latest_ny_month, ny_day) if
-      new_moon_date < earliest_ny_date &&
-      ny_day != 0  
-
-    # Does the date of the new moon fall between Jan 21, YIQ and Feb 21, YIQ?
-    calculated_new_years_day = new_moon_date if
-      new_moon_date >= earliest_ny_date ||
-      new_moon_date <= latest_ny_date 
+    if new_moon_date < earliest_ny_date
+      calculated_new_years_day = Date.new(yiq, ny_month, ny_day) 
+    else
+      calculated_new_years_day = new_moon_date
+    # - - - - - - - - - - - - - - - - PROBABLY DON'T NEED, BUT NOT SURE
+    # (earliest_ny_date..latest_ny_date).to_a.include? new_moon_date
+    # - - - - - - - - - - - - - - - - 
+    end  
   end
 end
 
