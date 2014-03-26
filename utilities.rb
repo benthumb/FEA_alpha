@@ -53,80 +53,6 @@ module Utilities
     end
   end
 
-  def calendar_yr_calc_beta(dates_hash, birth_date)
-    random_val = 1
-    last_day_jan = 31
-    thirty_days = 30
-    b_date = birth_date 
-
-    yr_idx_end = b_date.length-1
-    yr_idx_strt = yr_idx_end-3
-    b_year = b_date[yr_idx_strt..yr_idx_end]
-
-    date_new_moon = dates_hash[b_year]
-
-    # --------------------------new year's celebration date algo
-    algorithm_1 = lambda do |date_tbd|
-      var_nmd = date_tbd[4..5].to_i
-      var_temp = var_nmd + thirty_days
-      logger.debug "algo 1 ... var_temp value: " << var_temp.to_s
-      if var_temp == 31
-        return ("1" << var_temp.to_s).to_i
-      else
-        new_yr_date = var_temp - last_day_jan
-        return ("2" << new_yr_date.to_s).to_i
-      end
-    end
-    # --------------------------new year's celebration date algo
-    
-    convert = lambda do |date_to_convert|
-      logger.debug "converting date: " << date_to_convert.to_s
-      test_s = date_to_convert.chomp
-      months = Hash.new
-      months["Jan"] = "1"
-      months["Feb"] = "2"
-      converted_s = months[test_s[0..2]] << test_s[4..5]
-      return converted_s
-    end
-
-    formatted_date = lambda do |date_s|
-      if date_s[2] == "0"
-        #logger.debug "algo formatted date: " << date_s[1] << date_s[3]
-        return date_s[1] << date_s[3]
-      else
-        #logger.debug "algo formatted date: " << date_s[1..3]
-        return date_s[1..3]
-      end
-    end
-
-    new_moon_date_format = convert[date_new_moon]
-    logger.debug "New moon: formatted date - " << new_moon_date_format.to_s 
-
-    # is date (new moon) before 121
-    if new_moon_date_format.to_i < 121
-      random_val = algorithm_1[date_new_moon]
-    end
-
-    # is date (new moon) between 121 and 221?
-    if !(new_moon_date_format.to_i < 121) && !(new_moon_date_format.to_i > 221)
-      random_val = convert[date_new_moon].to_i
-    end
-
-    b_date_f = formatted_date[b_date].to_i
-
-    if b_date_f < random_val && !(random_val.to_s[0].to_i < b_date_f.to_s[0].to_i)
-      return "" << (b_date[4..7].to_i - 1).to_s
-    else
-      return b_date[4..7]
-    end
-  end
-
-  def date_compare(date_to_compare)
-    parsed_date_object = parse_date(date_to_compare)
-    logger.debug "Date to compare is earlier!" if parsed_date_object < Date.new(2010,1,22) 
-    logger.debug "Date to compare is later!" if parsed_date_object > Date.new(2010,1,22) 
-  end
-
   # New algo implementation : will phase out <calendar_yr_calc_beta>
   def dates_to_compare(dates_hash, date_to_compare)
   # Basic algo: if birthdate < new moon date OR earliest possible new year's, 
@@ -134,94 +60,87 @@ module Utilities
   # Otherwise : if birthdate > new moon date, then
   # 1) estimate/calculate date of new year's celebration
   # 2) compare birthdate against above : < NYC date, goes to prior year; otherwise, goest to current year
-    random_val = 1
-    last_day_jan = 31
-    thirty_days = 30
-#    b_date = birth_date 
+	  
+    year = date_to_compare.to_s[4..7]
+
+    month = date_to_compare.to_s[0] != "0" ? date_to_compare.to_s[0..1] : date_to_compare.to_s[1] 
+
+    day = date_to_compare.to_s[2] != "0" ? date_to_compare.to_s[2..3] : date_to_compare.to_s[3] 
+   
+    logger.debug "---------------- date_to_compare (year): " << year 
+    logger.debug "---------------- date_to_compare (month): " << month 
+    logger.debug "---------------- date_to_compare (day): " << day 
+
     b_date = date_to_compare 
 
     yr_idx_end = b_date.length-1
     yr_idx_strt = yr_idx_end-3
     
     b_year = date_to_compare[yr_idx_strt..yr_idx_end]
-    earliest_ny_celebration = "0121" + b_year 
-    parsed_date_earliest = parse_date(earliest_ny_celebration) 
 
-    logger.debug "*********** date_to_compare: " << date_to_compare 
-    logger.debug "*********** b_year: " << b_year 
     date_new_moon = dates_hash[b_year]
-    logger.debug "*********** Date of new moon: " << date_new_moon 
 
     new_moon_date_arr = date_new_moon.split(" ");
+
     new_moon_month = new_moon_date_arr[0] == "Jan" ? "01":"02"
+
     new_moon_day = new_moon_date_arr[1]
-    new_moon_date = new_moon_month + new_moon_day + b_year 
-    logger.debug "*********** formatted new moon date: " << new_moon_date
 
-    parsed_date_object_compare = parse_date(date_to_compare)
-#    parsed_date_object_new_moon = parse_date(new_moon_date)
+    parsed_date_object_compare = Date.new(year.to_i, month.to_i, day.to_i)
+
+    # ----------- Date of new moon
     parsed_date_object_new_moon =  Date.new(b_year.to_i,new_moon_month.to_i,new_moon_day.to_i)
-    logger.debug "Date to compare is earlier!" if parsed_date_object_compare < parsed_date_object_new_moon
-    logger.debug "Date to compare is later!" if parsed_date_object_compare > parsed_date_object_new_moon
-  
-    # tbd : elsif clause - compare against calculated new year's celeb date ...   
-    if(parsed_date_object_compare < parsed_date_earliest || 
-       parsed_date_object_compare < parsed_date_object_new_moon ||
-       parsed_date_object_compare < new_years_day(new_moon_date, parsed_date_earliest.year))
-      prior_year = "" << (b_date[4..7].to_i - 1).to_s
+
+    if(parsed_date_object_compare < new_years_day(parsed_date_object_new_moon))    
+      prior_year = "" << (date_to_compare[4..7].to_i - 1).to_s
     else
-      same_year = b_date[4..7]
+      same_year = date_to_compare[4..7]
     end
   end
 
-  def new_years_day(new_moon_date, year)
-    thirty_days = 30
-    last_day_jan = 31
-    logger.debug ">>>>>>>>> New moon date: " << new_moon_date
-    var_nmd = new_moon_date[4..5].to_i
-    var_temp = var_nmd + thirty_days
-    logger.debug "algo 1 ... var_temp value: " << var_temp.to_s
-    if var_temp == 31
-      logger.debug "returning var_temp value: " << "1" << var_temp.to_s
-      nyc_date = parse_date("1" + var_temp + year)
-#      return ("1" << var_temp.to_s).to_i
-    else
-      new_yr_date = var_temp - last_day_jan
-      logger.debug "returning new_yr_date: " << "2" << new_yr_date.to_s
-      nyc_date = parse_date("2" << new_yr_date.to_s << year.to_s)
-#      return ("2" << new_yr_date.to_s).to_i
-    end
-  end
+  def new_years_day(new_moon_date)
+    # month, i.e., February or 2/21/YIQ (latest possible date) 
+    latest_ny_month = 2         
 
-  def parse_date(date_string)
-    logger.debug "Parse date: date_string: " << date_string
-    month, day, year = ""
-    if(date_string.length == 6)
-      logger.debug "Date to parse 6 chars: " << date_string
-      month = date_string[0].to_i 
-      logger.debug "Month: " << month.to_s
-      day = date_string[1].to_i 
-      logger.debug "Day: " << day.to_s
-      year = date_string[2..5].to_i 
-      logger.debug "Year: " << year.to_s 
-    elsif(date_string.length == 7)
-      logger.debug "Date to parse 7 chars: " << date_string
-      month = date_string[0].to_i 
-      logger.debug "Month: " << month.to_s
-      day = date_string[1..2].to_i 
-      logger.debug "Day: " << day.to_s
-      year = date_string[3..6].to_i 
-      logger.debug "Year: " << year.to_s 
-    else
-      logger.debug "Date to parse 8 chars: " << date_string
-      month = date_string[0..1].to_i 
-      logger.debug "Month: " << month.to_s
-      day = date_string[2..3].to_i 
-      logger.debug "Day: " << day.to_s
-      year = date_string[4..7].to_i 
-      logger.debug "Year: " << year.to_s 
-    end
-    Date.new(year,month,day)
+    calculated_new_years_day = 0  # calculated new years day 
+    yiq = new_moon_date.year      # year in question
+
+    # month, i.e., 1/21/YIQ (earliest possible date) 
+    earliest_ny_month = 1         
+
+    # day, i.e., 1/21/YIQ (earliest possible date) 
+    earliest_latest_ny_day = 21   
+
+    # earliest possible new year's day/date 
+    earliest_ny_date = Date.new(yiq, 
+				earliest_ny_month, 
+				earliest_latest_ny_day) 
+
+    # latest possible new year's day/date 
+    latest_ny_date = Date.new(yiq, 
+				latest_ny_month, 
+				earliest_latest_ny_day) 
+
+    # advance date : new moon date < earliest possible new year's
+    thirty_days = 30           
+
+    # rollover point : earliest possible + 30 days
+    last_day_jan = 31          
+
+    # the DAY in date of New Year's  
+    ny_day = (new_moon_date.day + thirty_days) % last_day_jan  
+
+    # Is New Moon < (earlier) than Jan 21 YIQ : Date.new(YIQ,JAN,EARLIEST_DAY)
+
+    # Does the date of the new moon fall before Jan, 21 YIQ 
+    calculated_new_years_day = Date.new(yiq, latest_ny_month, ny_day) if
+      new_moon_date < earliest_ny_date &&
+      ny_day != 0  
+
+    # Does the date of the new moon fall between Jan 21, YIQ and Feb 21, YIQ?
+    calculated_new_years_day = new_moon_date if
+      new_moon_date >= earliest_ny_date ||
+      new_moon_date <= latest_ny_date 
   end
 end
 

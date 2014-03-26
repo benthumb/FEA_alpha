@@ -400,7 +400,7 @@ class Tests
     self.kua_profile
     self.birthdate_in_range
     self.year_lookup_hash
-    self.calendar_year
+    #self.calendar_year
     self.kua_dimension_details
     puts "*************** Test Stats ***************"
     puts "Total Tests: " << (self.passed_tests + self.failed_tests).to_s

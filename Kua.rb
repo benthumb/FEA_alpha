@@ -107,7 +107,7 @@ module Kua
   end
 
   def det_calendar_yr(birth_date)
-    calendar_yr_calc_beta(get_year_lookup_hash(birth_date), birth_date)
-    #dates_to_compare(get_year_lookup_hash(birth_date), birth_date)
+    #calendar_yr_calc_beta(get_year_lookup_hash(birth_date), birth_date)
+    dates_to_compare(get_year_lookup_hash(birth_date), birth_date)
   end
 end
