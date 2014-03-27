@@ -1,5 +1,5 @@
-require "./Logging.rb"
-require "./utilities.rb"
+require './Logging.rb'
+require './utilities.rb'
 # // This could be module too : it actually HAS to be one, 
 # otherwise, no way to access instance variables...
 class Profile

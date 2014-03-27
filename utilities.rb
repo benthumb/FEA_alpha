@@ -1,4 +1,4 @@
-require "./Logging.rb"
+require './Logging.rb'
 require 'date'
 
 module Utilities

@@ -1,6 +1,6 @@
-require "./Logging.rb"
-require "./utilities.rb"
-require "./Profile.rb"
+require './Logging.rb'
+require './utilities.rb'
+require './Profile.rb'
 
 module Kua
   include Logging
