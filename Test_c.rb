@@ -77,6 +77,10 @@ class Tests
     @colin_powell  = Person.new()
     @colin_powell.set_profile colin_profile 
 
+    liyang = Profile.new("Liyang Xia","10241981","Shanghai","female")
+    @liyang = Person.new()
+    @liyang.set_profile liyang 
+
     # **************** Love Interests ****************
     @melissa_profile = Profile.new("Melissa Dooley","03121972","Los Angeles","female")
     @melissa_dooley_lv = LoveInterest.new()
@@ -401,6 +405,12 @@ class Tests
 
     assert_equal(@colin_powell.kua_number, "9")
     assert_equal(@colin_powell.kua_group, "East")
+
+    puts "Liyang's kua number is: " << @liyang.kua_number
+    puts "Liyang's kua_group is: " << @liyang.kua_group
+
+    assert_equal(@liyang.kua_number, "5")
+    assert_equal(@liyang.kua_group, "West")
   end
 
   def run
